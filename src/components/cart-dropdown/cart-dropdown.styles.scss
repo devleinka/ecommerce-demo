@@ -12,6 +12,12 @@
     z-index: 5;
     text-transform: uppercase;
 
+    .empty-message {
+        font-size: 18px;
+        margin: 50px auto;
+        text-transform: none;
+    }
+
     .cart-items {
         height: 240px;
         display: flex;
