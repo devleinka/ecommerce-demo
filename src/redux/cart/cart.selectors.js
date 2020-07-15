@@ -15,7 +15,7 @@ export const selectCartHidden = createSelector(
     cart => cart.hidden
 );
 
-//because we use createSelector(), the output selector is now a memoized selector
+// because we use createSelector(), the output selector is now a memoized selector
 
 export const selectCartItemsCount = createSelector(
     [selectCartItems],
