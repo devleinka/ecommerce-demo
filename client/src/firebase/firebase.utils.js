@@ -10,9 +10,9 @@ const config = {
     storageBucket: "ecommerce-demo-db-73c9b.appspot.com",
     messagingSenderId: "1093260398530",
     appId: "1:1093260398530:web:ad12428df8f8d5f99fd05b"
-  };
+};
 
-  export const createUserProfileDocument = async (userAuth, additionalData) => {
+export const createUserProfileDocument = async (userAuth, additionalData) => {
     if (!userAuth) return;
 
     const userRef = firestore.doc(`users/${userAuth.uid}`);
@@ -37,6 +37,19 @@ const config = {
 
     return userRef;
   };
+
+export const getUserCartRef = async userId => {
+  const cartsRef = firestore.collection('carts').where('userId', '==', userId);
+  const snapShot = await cartsRef.get();
+
+  if (snapShot.empty) {
+    const cartDocRef = firestore.collection('carts').doc();
+    await cartDocRef.set({ userId, cartItems: [] });
+    return cartDocRef;
+  } else {
+    return snapShot.docs[0].ref;
+  }
+};
 
 export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => {
   const collectionRef = firestore.collection(collectionKey);
